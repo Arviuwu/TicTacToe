@@ -26,13 +26,20 @@ while (repeat)
     Console.WriteLine($"    A   B   C");
 
     Console.WriteLine("Enter coordinates");
-    coordinateInput = Console.ReadLine();
-    coordinate1 = coordinateInput[0] - '0';
-    coordinate2 = coordinateInput[1] - '0';
-    Console.WriteLine(coordinate1);
-    Console.WriteLine(coordinate2);
-    Console.WriteLine(board[coordinate1,coordinate2]);
+    coordinateInput = Console.ReadLine().ToUpper();
+    
 
+    if (!coordinateInput.Contains("A") || !coordinateInput.Contains("B") || !coordinateInput.Contains("C") || !coordinateInput.Contains("1") || !coordinateInput.Contains("2") || !coordinateInput.Contains("3"))
+    {
+        Console.WriteLine("oaiwhfoa");
+    }
+    else
+    {
+        coordinate1 = coordinateInput[0] - '1';
+        coordinate2 = coordinateInput[1] - 'A';
+        Console.WriteLine(board[coordinate1, coordinate2]);
+        
+    }
     
     
     
