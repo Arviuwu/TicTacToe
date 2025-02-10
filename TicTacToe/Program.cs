@@ -121,7 +121,7 @@ while (repeat)
     }
     else if (wincountP2 == 3)
     {
-        Console.WriteLine("Player 2 won");
+        Console.WriteLine("Player 2 won")
     }
     wincountP1 = 0;
     wincountP2 = 0;*/
