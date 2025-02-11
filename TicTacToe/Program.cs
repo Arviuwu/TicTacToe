@@ -15,7 +15,7 @@ string[,] board =
 {
     {"X", " ", " " },
     {"X", " ", " " },
-    {"X", " ", " " }
+    {" ", " ", " " }
 };
 
 
@@ -32,6 +32,23 @@ while (repeat)
     Console.WriteLine($"3 | {board[2, 0]} | {board[2, 1]} | {board[2, 2]} |");
     Console.WriteLine($"   -----------");
     Console.WriteLine($"    A   B   C");
+    
+    // win check
+    if (win)
+    {
+        Console.WriteLine("win");
+        if (pOTurn)
+        {
+            Console.Write(" Player X");
+            break;
+        }
+        else if (pXTurn) 
+        {
+            Console.Write(" Player O");
+            break;
+        }
+
+    }
 
     // marker placement loop
     while (true)
@@ -71,9 +88,21 @@ while (repeat)
         }
     }
 
-    // win check    
+    // win check left vertical
+       win = false;
 
-    for (int i = 0; i < 3; i++) //left vertical line  
+    if (board[0, 0] == board[1, 0] && board[1, 0] == board[2, 0] && !board[0, 0].Contains(" ") && !board[1, 0].Contains(" ") && !board[2, 0].Contains(" ") )
+        {
+        win = true;
+        }
+    // middle vertical
+    else if(board[0, 1] == board[1, 1] && board[1, 1] == board[2, 1] && !board[0, 1].Contains(" ") && !board[1, 1].Contains(" ") && !board[2, 1].Contains(" "))
+    {
+        win = true;
+    }
+    
+    
+    /*for (int i = 0; i < 3; i++) //left vertical line  
     {
         if (board[i, 0] != " ")
         {
@@ -98,7 +127,7 @@ while (repeat)
     Console.WriteLine(wincountPX);
     Console.WriteLine(wincountPO);
     wincountPX = 0;
-    wincountPO = 0;
+    wincountPO = 0;*/
 
 
     /*for (int i = 0; i < 3; i++) //middle vertical line  
