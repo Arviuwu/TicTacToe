@@ -100,8 +100,33 @@ while (repeat)
     {
         win = true;
     }
-    
-    
+    // right vertical
+    else if(board[0, 2] == board[1, 2] && board[1, 2] == board[2, 2] && !board[0, 2].Contains(" ") && !board[1, 2].Contains(" ") && !board[2, 2].Contains(" "))
+    {
+        win = true;
+    }
+    // up horizontal
+    else if(board[0, 0] == board[0, 1] && board[0, 1] == board[0, 2] && !board[0, 0].Contains(" ") && !board[0, 1].Contains(" ") && !board[0, 2].Contains(" "))
+    {
+        win = true;
+    }
+    // middle horizontal
+    else if (board[1, 0] == board[1, 1] && board[1, 1] == board[1, 2] && !board[1, 0].Contains(" ") && !board[1, 1].Contains(" ") && !board[1, 2].Contains(" "))
+    {
+        win = true;
+    }
+    // down horizontal
+    else if (board[2, 0] == board[2, 1] && board[2, 1] == board[2, 2] && !board[2, 0].Contains(" ") && !board[2, 1].Contains(" ") && !board[2, 2].Contains(" "))
+    {
+        win = true;
+    }
+    // diag left -> right
+    else if (board[1, 0] == board[1, 1] && board[1, 1] == board[1, 2] && !board[1, 0].Contains(" ") && !board[1, 1].Contains(" ") && !board[1, 2].Contains(" "))
+    {
+        win = true;
+    }
+
+
     /*for (int i = 0; i < 3; i++) //left vertical line  
     {
         if (board[i, 0] != " ")
