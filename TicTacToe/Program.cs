@@ -1,4 +1,4 @@
-﻿bool repeat = true;
+﻿bool playLoop = true;
 string coordinateInput = "";
 int coordinate1 = 0;
 int coordinate2 = 0;
@@ -8,6 +8,8 @@ string pXSign = "X";
 string pOSign = "O";
 string error = "Unexpected error";
 bool win = false;
+int roundCount = 0;
+
 
 string[,] board =
 {
@@ -17,7 +19,7 @@ string[,] board =
 };
 
 
-while (repeat)
+while (playLoop)
 {
     Console.Clear();
 
@@ -30,19 +32,23 @@ while (repeat)
     Console.WriteLine($"3 | {board[2, 0]} | {board[2, 1]} | {board[2, 2]} |");
     Console.WriteLine($"   -----------");
     Console.WriteLine($"    A   B   C");
-    
+
     // win check
     if (win)
     {
-        Console.WriteLine("win");
         if (pOTurn)
         {
-            Console.Write(" Player X");
+            Console.Write(" Player X wins");
             break;
         }
-        else if (pXTurn) 
+        else if (pXTurn)
         {
-            Console.Write(" Player O");
+            Console.Write(" Player O wins");
+            break;
+        }
+        else if(roundCount == 8)
+        {
+            Console.WriteLine("Draw!");
             break;
         }
 
@@ -53,21 +59,50 @@ while (repeat)
     {
         Console.WriteLine("Enter coordinates");
         coordinateInput = Console.ReadLine().ToUpper();// check for input 2 char long, save number in coord 1, letter in coord 2 depending on order in input
-        if(coordinateInput.Length == 2)
-        {
-            if (Char.IsDigit(coordinateInput[0]))
-            {
 
+        // input validadation 
+        while (true)
+        {
+            if (coordinateInput.Length == 2)
+            {
+                char firstChar = coordinateInput[0];
+                char secondChar = coordinateInput[1];
+
+                // Check if the input is valid (A-C and 1-3)(gpt solution)
+                bool firstIsValidDigit = firstChar >= '1' && firstChar <= '3';
+                bool firstIsValidLetter = firstChar >= 'A' && firstChar <= 'C';
+                bool secondIsValidDigit = secondChar >= '1' && secondChar <= '3';
+                bool secondIsValidLetter = secondChar >= 'A' && secondChar <= 'C';
+
+                if (firstIsValidDigit && secondIsValidLetter)
+                {
+                    coordinate1 = firstChar - '1';
+                    coordinate2 = secondChar - 'A';
+                    break;
+                }
+                else if (firstIsValidLetter && secondIsValidDigit)
+                {
+                    coordinate1 = secondChar - '1';
+                    coordinate2 = firstChar - 'A';
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("enter a valid coordinate");
+                    coordinateInput = Console.ReadLine().ToUpper();
+                }
+            }
+            else
+            {
+                Console.WriteLine("coordinate cant be longer than 2");
+                coordinateInput = Console.ReadLine().ToUpper();
             }
         }
 
-
-        coordinate1 = coordinateInput[0] - '1';
-        coordinate2 = coordinateInput[1] - 'A';
-
-        if (board[coordinate1, coordinate2] == " ")
+        //placing play markers
+        if (board[coordinate1, coordinate2] == " ")// checking for empty spot
         {
-            if (pXTurn)
+            if (pXTurn) //placing marker on coordinate depending on turn
             {
 
                 board[coordinate1, coordinate2] = pXSign;
@@ -75,9 +110,9 @@ while (repeat)
                 pOTurn = true;
                 break;
             }
-            else if (pOTurn)
+            else if (pOTurn) //placing marker on coordinate depending on turn
             {
-                board[coordinate2, coordinate1] = pOSign;
+                board[coordinate1, coordinate2] = pOSign;
                 pXTurn = true;
                 pOTurn = false;
                 break;
@@ -94,24 +129,24 @@ while (repeat)
     }
 
     // win check left vertical
-       win = false;
+    win = false;
 
-    if (board[0, 0] == board[1, 0] && board[1, 0] == board[2, 0] && !board[0, 0].Contains(" ") && !board[1, 0].Contains(" ") && !board[2, 0].Contains(" ") )
-        {
+    if (board[0, 0] == board[1, 0] && board[1, 0] == board[2, 0] && !board[0, 0].Contains(" ") && !board[1, 0].Contains(" ") && !board[2, 0].Contains(" "))
+    {
         win = true;
-        }
+    }
     // middle vertical
-    else if(board[0, 1] == board[1, 1] && board[1, 1] == board[2, 1] && !board[0, 1].Contains(" ") && !board[1, 1].Contains(" ") && !board[2, 1].Contains(" "))
+    else if (board[0, 1] == board[1, 1] && board[1, 1] == board[2, 1] && !board[0, 1].Contains(" ") && !board[1, 1].Contains(" ") && !board[2, 1].Contains(" "))
     {
         win = true;
     }
     // right vertical
-    else if(board[0, 2] == board[1, 2] && board[1, 2] == board[2, 2] && !board[0, 2].Contains(" ") && !board[1, 2].Contains(" ") && !board[2, 2].Contains(" "))
+    else if (board[0, 2] == board[1, 2] && board[1, 2] == board[2, 2] && !board[0, 2].Contains(" ") && !board[1, 2].Contains(" ") && !board[2, 2].Contains(" "))
     {
         win = true;
     }
     // up horizontal
-    else if(board[0, 0] == board[0, 1] && board[0, 1] == board[0, 2] && !board[0, 0].Contains(" ") && !board[0, 1].Contains(" ") && !board[0, 2].Contains(" "))
+    else if (board[0, 0] == board[0, 1] && board[0, 1] == board[0, 2] && !board[0, 0].Contains(" ") && !board[0, 1].Contains(" ") && !board[0, 2].Contains(" "))
     {
         win = true;
     }
@@ -137,66 +172,13 @@ while (repeat)
     }
     else
     {
-        win = false; 
+        win = false;
     }
-
-    /*for (int i = 0; i < 3; i++) //left vertical line  
-    {
-        if (board[i, 0] != " ")
-        {
-            if(board[i, 0] == pXSign)
-            {
-                wincountPX++;
-            }
-            else if (board[i, 0] == pOSign)
-            {
-                wincountPO++;
-            }
-        }
-    }
-    if (wincountPX == 3) 
-    {
-        Console.WriteLine("Player X won");
-    }
-    else if (wincountPO == 3)
-    {
-        Console.WriteLine("Player O won");
-    }
-    Console.WriteLine(wincountPX);
-    Console.WriteLine(wincountPO);
-    wincountPX = 0;
-    wincountPO = 0;*/
-
-
-    /*for (int i = 0; i < 3; i++) //middle vertical line  
-    {
-        if (board[i, 1] != " ")
-        {
-            if (board[i, 1] == P1Sign)
-            {
-                wincountP1++;
-            }
-            else
-            {
-                wincountP2++;
-            }
-        }
-    }
-    if (wincountP1 == 3)
-    {
-        Console.WriteLine("Player 1 won");
-    }
-    else if (wincountP2 == 3)
-    {
-        Console.WriteLine("Player 2 won")
-    }
-    wincountP1 = 0;
-    wincountP2 = 0;*/
-
-    Console.ReadKey();
-}    
     
-    
-    
- 
+    roundCount++;
+}
+
+
+
+
 
