@@ -8,13 +8,11 @@ string pXSign = "X";
 string pOSign = "O";
 string error = "Unexpected error";
 bool win = false;
-int wincountPX = 0;
-int wincountPO = 0;
 
 string[,] board =
 {
-    {"X", " ", " " },
-    {"X", " ", " " },
+    {" ", " ", " " },
+    {" ", " ", " " },
     {" ", " ", " " }
 };
 
@@ -54,7 +52,14 @@ while (repeat)
     while (true)
     {
         Console.WriteLine("Enter coordinates");
-        coordinateInput = Console.ReadLine().ToUpper();
+        coordinateInput = Console.ReadLine().ToUpper();// check for input 2 char long, save number in coord 1, letter in coord 2 depending on order in input
+        if(coordinateInput.Length == 2)
+        {
+            if (Char.IsDigit(coordinateInput[0]))
+            {
+
+            }
+        }
 
 
         coordinate1 = coordinateInput[0] - '1';
@@ -121,11 +126,19 @@ while (repeat)
         win = true;
     }
     // diag left -> right
-    else if (board[1, 0] == board[1, 1] && board[1, 1] == board[1, 2] && !board[1, 0].Contains(" ") && !board[1, 1].Contains(" ") && !board[1, 2].Contains(" "))
+    else if (board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2] && !board[1, 1].Contains(" ") && !board[1, 1].Contains(" ") && !board[2, 2].Contains(" "))
     {
         win = true;
     }
-
+    //diag right -> left
+    else if (board[0, 2] == board[1, 1] && board[1, 1] == board[2, 0] && !board[0, 2].Contains(" ") && !board[1, 1].Contains(" ") && !board[2, 0].Contains(" "))
+    {
+        win = true;
+    }
+    else
+    {
+        win = false; 
+    }
 
     /*for (int i = 0; i < 3; i++) //left vertical line  
     {
