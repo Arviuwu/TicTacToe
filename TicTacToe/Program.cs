@@ -59,11 +59,25 @@ while (true)
             }
 
         }
+        Console.WriteLine();
 
         // marker placement loop
         while (true)
         {
-            Console.WriteLine("Enter coordinates");
+            if (pOTurn)
+            {
+                Console.WriteLine("It's player O's turn.\nEnter your coordinates!");
+            }
+            else if (pXTurn)
+            {
+                Console.WriteLine("It's player X's turn.\nEnter your coordinates!");
+
+            }
+            else
+            {
+                Console.WriteLine(error);
+            }
+
             coordinateInput = Console.ReadLine().ToUpper();// check for input 2 char long, save number in coord 1, letter in coord 2 depending on order in input
 
             // input validadation 
@@ -188,26 +202,15 @@ while (true)
         
     
     }
-    Console.WriteLine("    Do you want to play another round? (Y/N)");
-    Console.Write("    ");
-    string anotherRound = Console.ReadLine().ToUpper();
-    if (anotherRound == "Y")
+    Console.WriteLine("Do you want to play another round? (Y/N)");
+    var anotherRound = Console.ReadKey().Key;
+    if (anotherRound == ConsoleKey.Y)
     {
-        
 
     }
-    else if (anotherRound == "N")
-    {
-        //exit game loop
-        break;
-    }
+    
     else
     {
-        //wrong input (y/n)
-        Console.WriteLine("    Enter \"Y\" play another round, \"N\" to stop playing.");
+        break;
     }
 }
-
-
-
-
