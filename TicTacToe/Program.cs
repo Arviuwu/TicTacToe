@@ -38,6 +38,7 @@ while (true)
         Console.WriteLine($"3 | {board[2, 0]} | {board[2, 1]} | {board[2, 2]} |");
         Console.WriteLine($"   -----------");
         Console.WriteLine($"    A   B   C");
+        Console.WriteLine(roundCount);
 
         // win check
         if (win)
@@ -52,7 +53,7 @@ while (true)
                 Console.Write(" Player O wins");
                 break;
             }
-            else if (roundCount == 8)
+            else if (roundCount == 9)
             {
                 Console.WriteLine("Draw!");
                 break;
