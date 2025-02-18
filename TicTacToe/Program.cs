@@ -26,34 +26,34 @@
     {" ", " ", " " },
     {" ", " ", " " }
     };
-            roundCount = 0;
-            pXTurn = true;
-            pOTurn = false;
-            win = false;
-            playLoop = true;
+    roundCount = 0;
+    pXTurn = true;
+    pOTurn = false;
+    win = false;
+    playLoop = true;
 
             while (playLoop)
             {
                 UpdateUI(board);
 
-                // win check
-                if (win)
-                {
-                    if (pOTurn)
-                    {
-                        Console.Write(" Player X wins");
-                        break;
-                    }
-                    else if (pXTurn)
-                    {
-                        Console.Write(" Player O wins");
-                        break;
-                    }
-                    else if (roundCount == 8)
-                    {
-                        Console.WriteLine("Draw!");
-                        break;
-                    }
+        // win check
+        if (win)
+        {
+            if (pOTurn)
+            {
+                Console.Write(" Player X wins");
+                break;
+            }
+            else if (pXTurn)
+            {
+                Console.Write(" Player O wins");
+                break;
+            }
+            else if (roundCount == 8)
+            {
+                Console.WriteLine("Draw!");
+                break;
+            }
 
                 }
                 Console.WriteLine();
