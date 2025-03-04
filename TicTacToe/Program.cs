@@ -206,22 +206,12 @@ namespace TicTacToe
                 }
             }
 
-            static void UpdateUI(string[,] board)
-            {
-                Console.Clear();
+            
 
-                //updates and draws board
-                Console.WriteLine($"   -----------");
-                Console.WriteLine($"1 | {board[0, 0]} | {board[0, 1]} | {board[0, 2]} |");
-                Console.WriteLine($"   -----------");
-                Console.WriteLine($"2 | {board[1, 0]} | {board[1, 1]} | {board[1, 2]} |");
-                Console.WriteLine($"   -----------");
-                Console.WriteLine($"3 | {board[2, 0]} | {board[2, 1]} | {board[2, 2]} |");
-                Console.WriteLine($"   -----------");
-                Console.WriteLine($"    A   B   C");
+            
             }
 
-            static void Reset(ref string[,] board,ref int roundCount, ref bool pXTurn, ref bool pOTurn, ref bool win, ref bool playLoop)
+        static void Reset(ref string[,] board,ref int roundCount, ref bool pXTurn, ref bool pOTurn, ref bool win, ref bool playLoop)
             {
                 //resetting values
                 for(int i = 0; i < board.GetLength(0); i++)
@@ -236,8 +226,20 @@ namespace TicTacToe
                 pOTurn = false;
                 win = false;
                 playLoop = true;
-            }
+        }
+        static void UpdateUI(string[,] board)
+        {
+            Console.Clear();
 
+            //updates and draws board
+            Console.WriteLine($"   -----------");
+            Console.WriteLine($"1 | {board[0, 0]} | {board[0, 1]} | {board[0, 2]} |");
+            Console.WriteLine($"   -----------");
+            Console.WriteLine($"2 | {board[1, 0]} | {board[1, 1]} | {board[1, 2]} |");
+            Console.WriteLine($"   -----------");
+            Console.WriteLine($"3 | {board[2, 0]} | {board[2, 1]} | {board[2, 2]} |");
+            Console.WriteLine($"   -----------");
+            Console.WriteLine($"    A   B   C");
         }
     }
 }
